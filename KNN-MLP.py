@@ -23,6 +23,7 @@ X = df.drop('label', axis=1)
 y = df['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+# Model 1: K-Nearest Neighbors (KNN)
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train, y_train)
 knn_predictions = knn.predict(X_test)
@@ -33,11 +34,13 @@ print("KNN Accuracy:", knn_accuracy)
 
 # In[3]:
 
-
+# Feature Scaling with StandardScaler
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
+
+#Model 2: Multi-Layer Perceptron (Neural Network)
 mlp = MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=300)
 mlp.fit(X_train_scaled, y_train)
 mlp_predictions = mlp.predict(X_test_scaled)
@@ -49,7 +52,7 @@ print("Neural Network Accuracy:", mlp_accuracy)
 
 # In[4]:
 
-
+#Classification Reports
 print("\nClassification Report for KNN:")
 print(classification_report(y_test, knn_predictions))
 
